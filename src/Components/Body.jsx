@@ -1,11 +1,12 @@
 import React from "react";
 import Container from "./Container";
+import Banner from "./Banner";
 
 const Body = () => {
   return (
     <div className="bg-gray-100">
       <Container>
-        <h1 text-amber-800>body</h1>
+        <Banner></Banner>
       </Container>
     </div>
   );

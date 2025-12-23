@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="bg-white">
       <Container>
-        <nav className="flex flex-col lg:flex-row items-center justify-between my-5 px-4 md:px-10">
+        <nav className="flex flex-col lg:flex-row items-center justify-between my-5 ">
           <div className="font-bold text-xl md:text-2xl whitespace-nowrap">
             CS-Ticket System
           </div>
