@@ -1,46 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const Ticket = () => {
-  const [tickets, setTickets] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("./data.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("File not found");
-        return response.json();
-      })
-      .then((data) => {
-        setTickets(data.tickets);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching tickets:", error);
-        setLoading(false);
-      });
-  }, []);
-
+const Tickets = ({ tickets, onTicketClick }) => {
   const getStatusStyles = (status) => {
     const normalized = status.toLowerCase();
     if (normalized === "open") return "bg-[#dcfce7] text-[#15803d]";
-    if (normalized.includes("progress")) return "bg-[#fef9c3] text-[#a16207]";
-    return "bg-gray-100 text-gray-700";
+    return "bg-[#fef9c3] text-[#a16207]";
   };
 
-  if (loading)
-    return (
-      <div className="p-8 text-slate-500 text-center">Loading tickets...</div>
-    );
-  if (tickets.length === 0)
-    return (
-      <div className="p-8 text-red-500 text-center font-semibold">
-        No tickets found.
-      </div>
-    );
-
   return (
-    <div className=" p-8 min-h-screen">
-      <h2 className="text-xl font-bold text-[#001931] mb-6 border-b-2 border-dotted border-blue-200 pb-3">
+    <div className="py-4 min-h-screen">
+      <h2 className="text-xl font-bold text-[#001931] mb-6  pb-3">
         Customer Tickets
       </h2>
 
@@ -48,7 +17,8 @@ const Ticket = () => {
         {tickets.map((ticket) => (
           <div
             key={ticket.id}
-            className="bg-white p-5 rounded-md shadow-sm border border-gray-100 flex flex-col justify-between hover:border-blue-100 transition-colors"
+            onClick={() => onTicketClick(ticket)}
+            className="bg-white p-5 rounded-md shadow-sm border border-gray-100 flex flex-col justify-between hover:border-blue-400 cursor-pointer transition-all active:scale-95"
           >
             <div>
               <div className="flex justify-between items-start mb-2">
@@ -109,7 +79,7 @@ const Ticket = () => {
                     />
                   </svg>
 
-                  {ticket.createdAt.split("T")[0]}
+                  {ticket.createdAt?.split("T")[0] || "1/15/2024"}
                 </div>
               </div>
             </div>
@@ -120,4 +90,4 @@ const Ticket = () => {
   );
 };
 
-export default Ticket;
+export default Tickets;
