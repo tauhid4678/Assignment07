@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import Body from "./Components/Body";
 import Container from "./Components/Container";
 import Footer from "./Components/Footer";
@@ -9,6 +10,7 @@ function App() {
       <Header></Header>
       <Body></Body>
       <Footer></Footer>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

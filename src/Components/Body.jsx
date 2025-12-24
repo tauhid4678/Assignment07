@@ -3,6 +3,7 @@ import Container from "./Container";
 import Banner from "./Banner";
 import Tickets from "./Tickets";
 import Task from "./Task";
+import { toast } from "react-toastify";
 
 const Body = () => {
   const [allTickets, setAllTickets] = useState([]);
@@ -24,17 +25,17 @@ const Body = () => {
       inProgress.find((t) => t.id === ticket.id) ||
       resolved.find((t) => t.id === ticket.id)
     ) {
-      alert("Already in progress or resolved!");
+      toast.error("Already in progress or resolved!");
       return;
     }
     setInProgress([...inProgress, ticket]);
-    alert(`Added: ${ticket.title}`);
+    toast.success(`Added: ${ticket.title}`);
   };
 
   const handleCompleteTask = (task) => {
     setInProgress(inProgress.filter((t) => t.id !== task.id));
     setResolved([...resolved, task]);
-    alert(`Completed: ${task.title}`);
+    toast.info(`Completed: ${task.title}`);
   };
 
   if (loading)
